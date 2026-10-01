@@ -141,3 +141,12 @@ La matriz de riesgos proporciona un mecanismo cuantitativo para priorizar las am
 La utilización de Probabilidad × Impacto permite enfocar los recursos de gestión en los riesgos de mayor severidad, especialmente aquellos relacionados con retrasos, generación de rutas y seguridad.
 
 El registro deberá mantenerse actualizado durante los Sprints para que forme parte del proceso de adaptación propio del enfoque híbrido.
+
+## Control de cambios
+
+| Versión | Fecha | Descripción | Responsable |
+|---|---|---|---|
+| 1.0.0 | 17/09/2026 | Matriz inicial de riesgos. | Equipo EcoLogística |
+| 1.1.0 | 01/10/2026 | Se confirma el riesgo de carga prohibida y de geolocalización fuera de WGS84, ya tratados como RN-016 y como restricción C-04. | ZEVALLOS MELENDRES YIMER EDYSON |
+
+[← Volver al README Principal](../../README.md)

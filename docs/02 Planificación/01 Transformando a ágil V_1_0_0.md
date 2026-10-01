@@ -1278,6 +1278,13 @@ El backlog priorizado permite iniciar el desarrollo con un Sprint 1 orientado a 
 
 La estructura propuesta mantiene el enfoque híbrido del proyecto, combinando la planificación inicial con una ejecución iterativa y adaptable.
 
+## Control de cambios
+
+| Versión | Fecha | Descripción | Responsable |
+|---|---|---|---|
+| 1.0.0 | 17/09/2026 | Transformación inicial del backlog. | Equipo EcoLogística |
+| 1.1.0 | 01/10/2026 | El Sprint 2 alinea el backlog con la línea base corregida: el rol de consulta es el cliente (contratante), el inicio de sesión evalúa el contador al comenzar y los pedidos rechazan carga prohibida (RN-016). | ZEVALLOS MELENDRES YIMER EDYSON |
+
 ---
 
 [← Volver al README Principal](../../README.md)

@@ -218,3 +218,12 @@ La mayor inversión corresponde al recurso humano, debido a la necesidad de cont
 El presupuesto se encuentra alineado con el enfoque híbrido del proyecto, permitiendo controlar los costos mediante planificación inicial y realizar ajustes durante los ciclos iterativos de desarrollo.
 
 La reserva de contingencia proporciona capacidad financiera para responder a riesgos técnicos, operativos y de gestión sin comprometer inmediatamente el presupuesto base.
+
+## Control de cambios
+
+| Versión | Fecha | Descripción | Responsable |
+|---|---|---|---|
+| 1.0.0 | 17/09/2026 | Presupuesto inicial de USD 10,175.20. | Equipo EcoLogística |
+| 1.1.0 | 01/10/2026 | El acta de constitución usa este mismo tope. No hubo cambio de monto en el Sprint 2. | ZEVALLOS MELENDRES YIMER EDYSON |
+
+[← Volver al README Principal](../../README.md)

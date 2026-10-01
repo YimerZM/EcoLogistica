@@ -560,6 +560,13 @@ El release **v1.0.0-MVP** establece el primer objetivo de entrega del proyecto y
 
 El uso de Jira complementa el enfoque híbrido de EcoLogística, ya que la documentación formal se mantiene en el repositorio mientras que la ejecución, priorización y seguimiento del trabajo se gestionan mediante prácticas Scrum.
 
+## Control de cambios
+
+| Versión | Fecha | Descripción | Responsable |
+|---|---|---|---|
+| 1.0.0 | 17/09/2026 | Evidencia inicial de la configuración de Jira. | Equipo EcoLogística |
+| 1.1.0 | 01/10/2026 | Se mantiene el Sprint 1 (US-001, US-003, US-004 y US-005). El Sprint 2 de implementación toma ese núcleo y le aplica las correcciones de la línea base. | ZEVALLOS MELENDRES YIMER EDYSON |
+
 ---
 
 [← Volver al README Principal](../../README.md)
