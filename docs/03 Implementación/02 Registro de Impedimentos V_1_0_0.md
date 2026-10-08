@@ -1,5 +1,7 @@
 # Registro de impedimentos
 
+La versión vigente de los sprints está en [Sprint 1](Sprint_1/02%20Registro%20de%20Impedimentos%20V_1_0_0.md) y [Sprint 2](Sprint_2/02%20Registro%20de%20Impedimentos%20V_1_0_0.md).
+
 [← Volver al README Principal](../../README.md)
 
 **Nombre del Proyecto:** EcoLogística – Sistema de Optimización de Rutas Sostenibles

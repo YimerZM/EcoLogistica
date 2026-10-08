@@ -29,12 +29,19 @@ Equipo: ZEVALLOS MELENDRES YIMER EDYSON (director), POMACHAGUA YAPIAS BRYAN ANTO
 
 ## Fase 03: Implementación
 
-Sprint 2. Los documentos están en `docs/03 Implementación`.
+### Sprint 1 — Núcleo operativo de registros
 
-1. [01 Informe de estado del proyecto V_1_0_0](docs/03%20Implementación/01%20Informe%20de%20estado%20del%20proyecto%20V_1_0_0.md)
-2. [02 Registro de Impedimentos V_1_0_0](docs/03%20Implementación/02%20Registro%20de%20Impedimentos%20V_1_0_0.md)
-3. [03 Revisión del Sprint V_1_0_0](docs/03%20Implementación/03%20Revisión%20del%20Sprint%20V_1_0_0.md)
-4. [04 Retrospectiva del Sprint V_1_0_0](docs/03%20Implementación/04%20Retrospectiva%20del%20Sprint%20V_1_0_0.md)
+1. [01 Informe de estado del proyecto V_1_0_0](docs/03%20Implementación/Sprint_1/01%20Informe%20de%20estado%20del%20proyecto%20V_1_0_0.md)
+2. [02 Registro de Impedimentos V_1_0_0](docs/03%20Implementación/Sprint_1/02%20Registro%20de%20Impedimentos%20V_1_0_0.md)
+3. [03 Revisión del Sprint V_1_0_0](docs/03%20Implementación/Sprint_1/03%20Revisión%20del%20Sprint%20V_1_0_0.md)
+4. [04 Retrospectiva del Sprint V_1_0_0](docs/03%20Implementación/Sprint_1/04%20Retrospectiva%20del%20Sprint%20V_1_0_0.md)
+
+### Sprint 2 — Incremento ejecutable del núcleo operativo
+
+1. [01 Informe de estado del proyecto V_1_0_0](docs/03%20Implementación/Sprint_2/01%20Informe%20de%20estado%20del%20proyecto%20V_1_0_0.md)
+2. [02 Registro de Impedimentos V_1_0_0](docs/03%20Implementación/Sprint_2/02%20Registro%20de%20Impedimentos%20V_1_0_0.md)
+3. [03 Revisión del Sprint V_1_0_0](docs/03%20Implementación/Sprint_2/03%20Revisión%20del%20Sprint%20V_1_0_0.md)
+4. [04 Retrospectiva del Sprint V_1_0_0](docs/03%20Implementación/Sprint_2/04%20Retrospectiva%20del%20Sprint%20V_1_0_0.md)
 
 ## Código
 

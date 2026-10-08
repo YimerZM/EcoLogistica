@@ -1,5 +1,7 @@
 # Informe de estado del proyecto
 
+La versión vigente de los sprints está en [Sprint 1](Sprint_1/01%20Informe%20de%20estado%20del%20proyecto%20V_1_0_0.md) y [Sprint 2](Sprint_2/01%20Informe%20de%20estado%20del%20proyecto%20V_1_0_0.md).
+
 [← Volver al README Principal](../../README.md)
 
 **Nombre del Proyecto:** EcoLogística – Sistema de Optimización de Rutas Sostenibles
