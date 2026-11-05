@@ -43,6 +43,23 @@ Equipo: ZEVALLOS MELENDRES YIMER EDYSON (director), POMACHAGUA YAPIAS BRYAN ANTO
 3. [03 Revisión del Sprint V_1_0_0](docs/03%20Implementación/Sprint_2/03%20Revisión%20del%20Sprint%20V_1_0_0.md)
 4. [04 Retrospectiva del Sprint V_1_0_0](docs/03%20Implementación/Sprint_2/04%20Retrospectiva%20del%20Sprint%20V_1_0_0.md)
 
+## Inspección 3
+
+Los archivos llevan la fecha `20261105`, el número y el nombre. Están en `docs/04 Inspección 3`.
+
+1. [20261105 01 Plan de trabajo](docs/04%20Inspección%203/20261105%2001%20Plan%20de%20trabajo.md)
+2. [20261105 02.1 Flujo de trabajo GitFlow](docs/04%20Inspección%203/20261105%2002.1%20Flujo%20de%20trabajo%20GitFlow.md)
+3. [20261105 02.2 Pruebas de sistema](docs/04%20Inspección%203/20261105%2002.2%20Pruebas%20de%20sistema.md)
+4. [20261105 02.3 Pruebas de extremo a extremo](docs/04%20Inspección%203/20261105%2002.3%20Pruebas%20de%20extremo%20a%20extremo.md)
+5. [20261105 02.4 Sincronización repositorio remoto](docs/04%20Inspección%203/20261105%2002.4%20Sincronización%20repositorio%20remoto.md)
+6. [20261105 02.5 Demostración del product increment - Sprint 1](docs/04%20Inspección%203/20261105%2002.5%20Demostración%20del%20product%20increment%20-%20Sprint%201.md)
+7. [20261105 03.1 Minuta de Reunión](docs/04%20Inspección%203/20261105%2003.1%20Minuta%20de%20Reunión.md)
+8. [20261105 03.2 Informe de Estado del Proyecto](docs/04%20Inspección%203/20261105%2003.2%20Informe%20de%20Estado%20del%20Proyecto.md)
+9. [20261105 03.3 Registro de Impedimentos](docs/04%20Inspección%203/20261105%2003.3%20Registro%20de%20Impedimentos.md)
+10. [20261105 04.1 Revisión del Sprint](docs/04%20Inspección%203/20261105%2004.1%20Revisión%20del%20Sprint.md)
+11. [20261105 04.2 Retrospectiva del Sprint](docs/04%20Inspección%203/20261105%2004.2%20Retrospectiva%20del%20Sprint.md)
+12. [20261105 05 Manual técnico del sistema](docs/04%20Inspección%203/20261105%2005%20Manual%20técnico%20del%20sistema.md)
+
 ## Código
 
 - `src/frontend`: interfaz del incremento.
