@@ -108,6 +108,31 @@ class ExtremoAExtremoTest(unittest.TestCase):
         self.assertEqual(codigo, 200)
         self.assertEqual(len(lista["pedidos"]), 1)
 
+        codigo, denegado = self.llamar(
+            "/api/usuarios",
+            {"email": "cliente@ecologistica.test", "nombre": "Cliente", "rol": "Contratante", "password": "cliente123"},
+            token,
+        )
+        self.assertEqual(codigo, 403)
+
+        codigo, admin = self.llamar(
+            "/api/sesion",
+            {"email": "administrador@ecologistica.test", "password": "admin123"},
+        )
+        self.assertTrue(admin["ok"])
+        codigo, usuario = self.llamar(
+            "/api/usuarios",
+            {"email": "cliente@ecologistica.test", "nombre": "Cliente", "rol": "Contratante", "password": "cliente123"},
+            admin["token"],
+        )
+        self.assertEqual(codigo, 201)
+        self.assertEqual(usuario["usuario"]["rol"], "Contratante")
+
+        codigo, ruta = self.llamar("/api/rutas", {}, token)
+        self.assertEqual(codigo, 201)
+        self.assertEqual(ruta["rutas"][0]["paradas"][0]["distrito"], "Huancayo")
+        self.assertEqual(len(ruta["rutas"][0]["paradas"]), 1)
+
 
 if __name__ == "__main__":
     unittest.main()

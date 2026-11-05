@@ -43,6 +43,13 @@ Equipo: ZEVALLOS MELENDRES YIMER EDYSON (director), POMACHAGUA YAPIAS BRYAN ANTO
 3. [03 Revisión del Sprint V_1_0_0](docs/03%20Implementación/Sprint_2/03%20Revisión%20del%20Sprint%20V_1_0_0.md)
 4. [04 Retrospectiva del Sprint V_1_0_0](docs/03%20Implementación/Sprint_2/04%20Retrospectiva%20del%20Sprint%20V_1_0_0.md)
 
+### Sprint 3 — Usuarios y propuesta de ruta
+
+1. [01 Informe de estado del proyecto V_1_0_0](docs/03%20Implementación/Sprint_3/01%20Informe%20de%20estado%20del%20proyecto%20V_1_0_0.md)
+2. [02 Registro de Impedimentos V_1_0_0](docs/03%20Implementación/Sprint_3/02%20Registro%20de%20Impedimentos%20V_1_0_0.md)
+3. [03 Revisión del Sprint V_1_0_0](docs/03%20Implementación/Sprint_3/03%20Revisión%20del%20Sprint%20V_1_0_0.md)
+4. [04 Retrospectiva del Sprint V_1_0_0](docs/03%20Implementación/Sprint_3/04%20Retrospectiva%20del%20Sprint%20V_1_0_0.md)
+
 ## Inspección 3
 
 Los archivos llevan la fecha `20261105`, el número y el nombre. Están en `docs/04 Inspección 3`.
@@ -72,4 +79,7 @@ python -m unittest tests.test_reglas
 python -m ecologistica
 ```
 
-La aplicación queda en http://127.0.0.1:8765. Usuario de prueba del operador: `operador@ecologistica.test` / `operador123`.
+La aplicación queda en http://127.0.0.1:8765.
+
+- Operador: `operador@ecologistica.test` / `operador123`
+- Administrador: `administrador@ecologistica.test` / `admin123`

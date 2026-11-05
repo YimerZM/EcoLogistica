@@ -53,6 +53,40 @@ class ServicioTest(unittest.TestCase):
         pedido = servicio.crear_pedido(punto["punto_id"], 10, "GENERAL")
         self.assertEqual(pedido["estado"], "PENDIENTE")
 
+    def test_el_administrador_crea_y_modifica_un_contratante(self):
+        servicio = Servicio()
+        creado = servicio.crear_usuario("cliente@ecologistica.test", "Cliente Tambo", "Contratante", "cliente123")
+        self.assertEqual(creado["estado"], "ACTIVO")
+        self.assertNotIn("password_hash", creado)
+        modificado = servicio.modificar_usuario("cliente@ecologistica.test", "Cliente Huancayo", "INACTIVO")
+        self.assertEqual(modificado["nombre"], "Cliente Huancayo")
+        self.assertEqual(modificado["estado"], "INACTIVO")
+        acceso = servicio.iniciar_sesion("cliente@ecologistica.test", "cliente123")
+        self.assertFalse(acceso["ok"])
+
+    def test_sin_vehiculo_no_hay_propuesta(self):
+        servicio = Servicio()
+        punto = servicio.crear_punto("Mercado", "Jr. Real", -12.07, -75.21, "Huancayo")
+        servicio.crear_pedido(punto["punto_id"], 10, "GENERAL")
+        resultado = servicio.generar_ruta()
+        self.assertFalse(resultado["ok"])
+        self.assertEqual(servicio.rutas, [])
+
+    def test_la_propuesta_ordena_paradas_y_respeta_la_capacidad(self):
+        servicio = Servicio()
+        sur = servicio.crear_punto("Chilca", "Av. Sur", -12.15, -75.20, "Chilca")
+        norte = servicio.crear_punto("Tambo", "Av. Norte", -12.00, -75.22, "El Tambo")
+        servicio.crear_pedido(sur["punto_id"], 30, "GENERAL")
+        servicio.crear_pedido(norte["punto_id"], 20, "GENERAL")
+        servicio.crear_vehiculo("ABC-123", 40)
+        resultado = servicio.generar_ruta()
+        self.assertTrue(resultado["ok"])
+        paradas = resultado["rutas"][0]["paradas"]
+        self.assertEqual([p["distrito"] for p in paradas], ["El Tambo"])
+        self.assertEqual(resultado["sin_cupo"], [servicio.pedidos[0]["pedido_id"]])
+        self.assertEqual(servicio.pedidos[0]["estado"], "PENDIENTE")
+        self.assertEqual(servicio.pedidos[1]["estado"], "EN_RUTA")
+
 
 if __name__ == "__main__":
     unittest.main()

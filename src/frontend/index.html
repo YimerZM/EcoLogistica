@@ -23,6 +23,36 @@
       <p id="mensaje-sesion" role="status"></p>
     </section>
 
+    <section id="usuarios" hidden>
+      <h2>Usuarios</h2>
+      <p class="ayuda">Solo el administrador registra y actualiza cuentas. La clave nueva no se muestra de nuevo.</p>
+      <form id="form-usuario">
+        <label>Correo <input name="email" type="email" required></label>
+        <label>Nombre <input name="nombre" required></label>
+        <label>Rol
+          <select name="rol" required>
+            <option>Operador</option>
+            <option selected>Contratante</option>
+            <option>Administrador</option>
+          </select>
+        </label>
+        <label>Clave <input name="password" type="password" minlength="8" required></label>
+        <button type="submit">Registrar usuario</button>
+      </form>
+      <form id="form-usuario-editar">
+        <label>Correo a modificar <input name="email" type="email" required></label>
+        <label>Nombre <input name="nombre" required></label>
+        <label>Estado
+          <select name="estado">
+            <option>ACTIVO</option>
+            <option>INACTIVO</option>
+          </select>
+        </label>
+        <button type="submit">Guardar cambios</button>
+      </form>
+      <ul id="lista-usuarios"></ul>
+    </section>
+
     <section id="operacion" hidden>
       <p id="sesion-activa"></p>
       <button id="salir" type="button">Cerrar sesión</button>
@@ -69,7 +99,20 @@
         <button type="submit">Registrar pedido</button>
       </form>
       <ul id="lista-pedidos"></ul>
+
+      <h2>Propuesta de ruta</h2>
+      <p class="ayuda">La propuesta ordena las paradas y respeta la capacidad. El mapa queda para el siguiente sprint.</p>
+      <button id="generar-ruta" type="button">Generar ruta</button>
+      <ul id="lista-rutas"></ul>
       <p id="mensaje-op" role="status"></p>
+    </section>
+
+    <section id="consulta" hidden>
+      <p id="sesion-consulta"></p>
+      <button id="salir-consulta" type="button">Cerrar sesión</button>
+      <h2>Pedidos</h2>
+      <p class="ayuda">El contratante ve el listado. El filtro por estado queda pendiente.</p>
+      <ul id="lista-consulta"></ul>
     </section>
   </main>
   <script src="js/app.js"></script>

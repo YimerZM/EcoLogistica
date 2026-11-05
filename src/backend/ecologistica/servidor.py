@@ -41,6 +41,16 @@ class Manejador(BaseHTTPRequestHandler):
             return False
         return True
 
+    def _exigir_rol(self, roles: tuple) -> bool:
+        usuario = SERVICIO.usuario_de(self._token())
+        if usuario is None:
+            self._json(401, {"ok": False, "mensaje": "Debe iniciar sesión."})
+            return False
+        if usuario["rol"] not in roles:
+            self._json(403, {"ok": False, "mensaje": "No tiene autorización para esta operación."})
+            return False
+        return True
+
     def do_GET(self):
         ruta = urlparse(self.path).path
         if ruta == "/api/vehiculos":
@@ -54,6 +64,14 @@ class Manejador(BaseHTTPRequestHandler):
         if ruta == "/api/pedidos":
             if self._exigir_sesion():
                 self._json(200, {"ok": True, "pedidos": SERVICIO.pedidos})
+            return
+        if ruta == "/api/usuarios":
+            if self._exigir_rol(("Administrador",)):
+                self._json(200, {"ok": True, "usuarios": SERVICIO.listar_usuarios()})
+            return
+        if ruta == "/api/rutas":
+            if self._exigir_rol(("Administrador", "Operador")):
+                self._json(200, {"ok": True, "rutas": SERVICIO.rutas})
             return
         self._estatico(ruta)
 
@@ -92,10 +110,50 @@ class Manejador(BaseHTTPRequestHandler):
                 )
                 self._json(201, {"ok": True, "pedido": creado})
                 return
+            if ruta == "/api/usuarios":
+                if not self._exigir_rol(("Administrador",)):
+                    return
+                creado = SERVICIO.crear_usuario(
+                    cuerpo.get("email", ""),
+                    cuerpo.get("nombre", ""),
+                    cuerpo.get("rol", ""),
+                    cuerpo.get("password", ""),
+                )
+                self._json(201, {"ok": True, "usuario": creado})
+                return
+            if ruta == "/api/rutas":
+                if not self._exigir_rol(("Administrador", "Operador")):
+                    return
+                resultado = SERVICIO.generar_ruta()
+                self._json(201 if resultado["ok"] else 400, resultado)
+                return
         except (TypeError, ValueError) as exc:
             self._json(400, {"ok": False, "mensaje": str(exc)})
             return
         self._json(404, {"ok": False, "mensaje": "Ruta no encontrada."})
+
+    def do_PUT(self):
+        ruta = urlparse(self.path).path
+        try:
+            cuerpo = self._leer()
+        except json.JSONDecodeError:
+            self._json(400, {"ok": False, "mensaje": "El cuerpo no es JSON válido."})
+            return
+        if ruta != "/api/usuarios":
+            self._json(404, {"ok": False, "mensaje": "Ruta no encontrada."})
+            return
+        if not self._exigir_rol(("Administrador",)):
+            return
+        try:
+            actualizado = SERVICIO.modificar_usuario(
+                cuerpo.get("email", ""),
+                cuerpo.get("nombre", ""),
+                cuerpo.get("estado", ""),
+            )
+        except (TypeError, ValueError) as exc:
+            self._json(400, {"ok": False, "mensaje": str(exc)})
+            return
+        self._json(200, {"ok": True, "usuario": actualizado})
 
     def _estatico(self, ruta: str) -> None:
         relativo = "index.html" if ruta in ("", "/") else ruta.lstrip("/")

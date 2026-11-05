@@ -1,4 +1,4 @@
-"""Casos de uso en memoria para el incremento del Sprint 2."""
+"""Casos de uso en memoria del incremento."""
 
 import hashlib
 import secrets
@@ -7,7 +7,9 @@ from datetime import datetime
 from ecologistica.reglas import (
     carga_prohibida,
     coordenada_valida,
+    datos_usuario_validos,
     preparar_contador,
+    propuesta_de_ruta,
     registrar_fallo,
 )
 
@@ -24,6 +26,7 @@ class Servicio:
         self.vehiculos = []
         self.puntos = []
         self.pedidos = []
+        self.rutas = []
         self._sec = 0
         self._cargar_demo()
 
@@ -37,6 +40,15 @@ class Servicio:
             "nombre": "Operador logístico",
             "rol": "Operador",
             "password_hash": _hash("operador123"),
+            "intentos_fallidos": 0,
+            "bloqueado_hasta": None,
+            "estado": "ACTIVO",
+        }
+        self.usuarios["administrador@ecologistica.test"] = {
+            "email": "administrador@ecologistica.test",
+            "nombre": "Administrador",
+            "rol": "Administrador",
+            "password_hash": _hash("admin123"),
             "intentos_fallidos": 0,
             "bloqueado_hasta": None,
             "estado": "ACTIVO",
@@ -75,6 +87,73 @@ class Servicio:
         if not email:
             return None
         return self.usuarios.get(email)
+
+    def listar_usuarios(self) -> list:
+        return [self._publico(usuario) for usuario in self.usuarios.values()]
+
+    def crear_usuario(self, email: str, nombre: str, rol: str, password: str) -> dict:
+        email = email.strip().lower()
+        error = datos_usuario_validos(email, nombre, rol)
+        if error:
+            raise ValueError(error)
+        if len(password) < 8:
+            raise ValueError("La clave debe tener al menos 8 caracteres.")
+        if email in self.usuarios:
+            raise ValueError("El correo ya está registrado.")
+        usuario = {
+            "email": email,
+            "nombre": nombre.strip(),
+            "rol": rol,
+            "password_hash": _hash(password),
+            "intentos_fallidos": 0,
+            "bloqueado_hasta": None,
+            "estado": "ACTIVO",
+        }
+        self.usuarios[email] = usuario
+        return self._publico(usuario)
+
+    def modificar_usuario(self, email: str, nombre: str, estado: str) -> dict:
+        email = email.strip().lower()
+        usuario = self.usuarios.get(email)
+        if usuario is None:
+            raise ValueError("El usuario no existe.")
+        if not nombre.strip():
+            raise ValueError("El nombre es obligatorio.")
+        if estado not in ("ACTIVO", "INACTIVO"):
+            raise ValueError("El estado debe ser ACTIVO o INACTIVO.")
+        if usuario["rol"] == "Administrador" and estado == "INACTIVO":
+            activos = [
+                otro
+                for otro in self.usuarios.values()
+                if otro["rol"] == "Administrador" and otro["estado"] == "ACTIVO" and otro["email"] != email
+            ]
+            if not activos:
+                raise ValueError("Debe quedar al menos un administrador activo.")
+        usuario["nombre"] = nombre.strip()
+        usuario["estado"] = estado
+        return self._publico(usuario)
+
+    def generar_ruta(self) -> dict:
+        resultado = propuesta_de_ruta(self.pedidos, self.vehiculos, self.puntos)
+        if not resultado["ok"]:
+            return resultado
+        for ruta in resultado["rutas"]:
+            ruta["ruta_id"] = self._id()
+            self.rutas.append(ruta)
+            vehiculo = next(v for v in self.vehiculos if v["vehiculo_id"] == ruta["vehiculo_id"])
+            vehiculo["estado"] = "EN_RUTA"
+            for parada in ruta["paradas"]:
+                pedido = next(p for p in self.pedidos if p["pedido_id"] == parada["pedido_id"])
+                pedido["estado"] = "EN_RUTA"
+        return resultado
+
+    def _publico(self, usuario: dict) -> dict:
+        return {
+            "email": usuario["email"],
+            "nombre": usuario["nombre"],
+            "rol": usuario["rol"],
+            "estado": usuario["estado"],
+        }
 
     def crear_vehiculo(self, placa: str, capacidad_kg: float) -> dict:
         placa = placa.strip().upper()
