@@ -7,114 +7,211 @@
   <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
-  <header>
-    <h1>EcoLogística</h1>
-    <p>Rutas en El Tambo, Huancayo y Chilca</p>
-  </header>
-  <main>
-    <section id="acceso">
-      <h2>Inicio de sesión</h2>
-      <p class="ayuda">Al comenzar, el sistema evalúa el contador de intentos. Si el bloqueo de 15 minutos ya venció, lo restablece antes de validar la clave.</p>
-      <form id="form-sesion">
-        <label>Correo <input name="email" type="email" value="operador@ecologistica.test" required></label>
-        <label>Clave <input name="password" type="password" value="operador123" required></label>
-        <button type="submit">Iniciar sesión</button>
-      </form>
-      <p id="mensaje-sesion" role="status"></p>
+  <div class="login" id="acceso">
+    <section class="marca">
+      <div>
+        <p class="sobrelinea">Taller de Proyectos 2 · Equipo Híbridos</p>
+        <h1>EcoLogística</h1>
+        <p>Planificación de rutas sostenibles para El Tambo, Huancayo y Chilca. La ubicación se registra con coordenadas WGS84, no con GPS del vehículo.</p>
+        <div class="distritos">
+          <article><span class="punto-marca"></span><div><strong>El Tambo</strong><br>Paradas del norte del valle</div></article>
+          <article><span class="punto-marca"></span><div><strong>Huancayo</strong><br>Base operativa y mercado</div></article>
+          <article><span class="punto-marca"></span><div><strong>Chilca</strong><br>Paradas del sur del valle</div></article>
+        </div>
+      </div>
+      <p>Al iniciar sesión el sistema revisa el contador. Si el bloqueo de 15 minutos ya venció, lo deja en cero antes de validar la clave.</p>
     </section>
-
-    <section id="usuarios" hidden>
-      <h2>Usuarios</h2>
-      <p class="ayuda">Solo el administrador registra y actualiza cuentas. La clave nueva no se muestra de nuevo.</p>
-      <form id="form-usuario">
-        <label>Correo <input name="email" type="email" required></label>
-        <label>Nombre <input name="nombre" required></label>
-        <label>Rol
-          <select name="rol" required>
-            <option>Operador</option>
-            <option selected>Contratante</option>
-            <option>Administrador</option>
-          </select>
-        </label>
-        <label>Clave <input name="password" type="password" minlength="8" required></label>
-        <button type="submit">Registrar usuario</button>
-      </form>
-      <form id="form-usuario-editar">
-        <label>Correo a modificar <input name="email" type="email" required></label>
-        <label>Nombre <input name="nombre" required></label>
-        <label>Estado
-          <select name="estado">
-            <option>ACTIVO</option>
-            <option>INACTIVO</option>
-          </select>
-        </label>
-        <button type="submit">Guardar cambios</button>
-      </form>
-      <ul id="lista-usuarios"></ul>
+    <section class="panel-acceso">
+      <div class="tarjeta">
+        <h2>Ingreso</h2>
+        <form id="form-sesion">
+          <label>Correo <input name="email" type="email" value="operador@ecologistica.test" required></label>
+          <label>Clave <input name="password" type="password" required></label>
+          <button type="submit">Iniciar sesión</button>
+        </form>
+        <p id="mensaje-sesion" class="aviso" role="status"></p>
+        <p class="ayuda">Cuentas de demostración. Elija un perfil y luego inicie sesión.</p>
+        <div class="cuentas" id="cuentas"></div>
+      </div>
     </section>
+  </div>
 
-    <section id="operacion" hidden>
-      <p id="sesion-activa"></p>
-      <button id="salir" type="button">Cerrar sesión</button>
+  <div class="app" id="aplicacion" hidden>
+    <nav class="menu" id="menu"></nav>
+    <main class="contenido">
+      <header class="barra">
+        <div>
+          <h2 id="titulo-panel">Inicio</h2>
+          <p id="sesion-activa" class="ayuda"></p>
+        </div>
+        <button id="salir" class="secundario" type="button">Cerrar sesión</button>
+      </header>
+      <p id="mensaje-op" class="aviso" role="status"></p>
 
-      <h2>Vehículo</h2>
-      <form id="form-vehiculo">
-        <label>Placa <input name="placa" required placeholder="ABC-123"></label>
-        <label>Capacidad (kg) <input name="capacidad_kg" type="number" min="1" step="0.1" required></label>
-        <button type="submit">Registrar vehículo</button>
-      </form>
-      <ul id="lista-vehiculos"></ul>
+      <section id="panel-inicio">
+        <div class="rejilla" id="metricas"></div>
+        <div class="bloque" style="margin-top:1rem">
+          <h3>Recorrido de demostración</h3>
+          <p class="ayuda">Carga dos vehículos y tres puntos, uno por distrito, para mostrar la planificación sin salir de la documentación.</p>
+          <button id="cargar-ejemplo" type="button">Preparar datos de El Tambo, Huancayo y Chilca</button>
+        </div>
+      </section>
 
-      <h2>Punto de entrega</h2>
-      <p class="ayuda">Geolocalización admitida: coordenadas WGS84 dentro de los tres distritos.</p>
-      <form id="form-punto">
-        <label>Nombre <input name="nombre" required></label>
-        <label>Dirección <input name="direccion" required></label>
-        <label>Distrito
-          <select name="distrito" required>
-            <option>El Tambo</option>
-            <option selected>Huancayo</option>
-            <option>Chilca</option>
-          </select>
-        </label>
-        <label>Latitud <input name="latitud" type="number" step="0.000001" value="-12.07" required></label>
-        <label>Longitud <input name="longitud" type="number" step="0.000001" value="-75.21" required></label>
-        <button type="submit">Registrar punto</button>
-      </form>
-      <ul id="lista-puntos"></ul>
+      <section id="panel-usuarios" hidden>
+        <div class="dos">
+          <form class="bloque" id="form-usuario">
+            <h3>Nuevo usuario</h3>
+            <label>Correo <input name="email" type="email" required></label>
+            <label>Nombre <input name="nombre" required></label>
+            <label>Rol
+              <select name="rol">
+                <option>Operador</option>
+                <option>Planificador</option>
+                <option>Conductor</option>
+                <option>Responsable</option>
+                <option>Auditor</option>
+                <option selected>Contratante</option>
+                <option>Administrador</option>
+              </select>
+            </label>
+            <label>Clave <input name="password" type="password" minlength="8" required></label>
+            <button type="submit">Registrar usuario</button>
+          </form>
+          <form class="bloque" id="form-usuario-editar">
+            <h3>Modificar usuario</h3>
+            <label>Correo <input name="email" type="email" required></label>
+            <label>Nombre <input name="nombre" required></label>
+            <label>Estado
+              <select name="estado"><option>ACTIVO</option><option>INACTIVO</option></select>
+            </label>
+            <button type="submit">Guardar cambios</button>
+          </form>
+        </div>
+        <div class="bloque" style="margin-top:1rem"><table class="tabla" id="tabla-usuarios"></table></div>
+      </section>
 
-      <h2>Pedido</h2>
-      <form id="form-pedido">
-        <label>Punto
-          <select name="punto_id" id="select-punto" required></select>
-        </label>
-        <label>Peso (kg) <input name="peso_kg" type="number" min="0.1" step="0.1" required></label>
-        <label>Tipo de carga
-          <select name="tipo_carga">
-            <option value="GENERAL">General</option>
-            <option value="explosivo">Explosivo (prohibido)</option>
-            <option value="residuo peligroso">Residuo peligroso (prohibido)</option>
-          </select>
-        </label>
-        <button type="submit">Registrar pedido</button>
-      </form>
-      <ul id="lista-pedidos"></ul>
+      <section id="panel-vehiculos" hidden>
+        <form class="bloque" id="form-vehiculo">
+          <h3>Registrar vehículo</h3>
+          <div class="dos">
+            <label>Placa <input name="placa" required placeholder="ABC-123"></label>
+            <label>Capacidad (kg) <input name="capacidad_kg" type="number" min="1" step="0.1" required></label>
+          </div>
+          <button type="submit">Registrar vehículo</button>
+        </form>
+        <div class="bloque" style="margin-top:1rem"><table class="tabla" id="tabla-vehiculos"></table></div>
+      </section>
 
-      <h2>Propuesta de ruta</h2>
-      <p class="ayuda">La propuesta ordena las paradas y respeta la capacidad. El mapa queda para el siguiente sprint.</p>
-      <button id="generar-ruta" type="button">Generar ruta</button>
-      <ul id="lista-rutas"></ul>
-      <p id="mensaje-op" role="status"></p>
-    </section>
+      <section id="panel-puntos" hidden>
+        <div class="dos">
+          <form class="bloque" id="form-punto">
+            <h3>Punto de entrega</h3>
+            <p class="ayuda">Solo coordenadas WGS84 dentro de los tres distritos. Lima y un GPS de a bordo no se aceptan.</p>
+            <label>Nombre <input name="nombre" required></label>
+            <label>Dirección <input name="direccion" required></label>
+            <label>Distrito
+              <select name="distrito"><option>El Tambo</option><option selected>Huancayo</option><option>Chilca</option></select>
+            </label>
+            <label>Latitud <input name="latitud" type="number" step="0.000001" value="-12.07" required></label>
+            <label>Longitud <input name="longitud" type="number" step="0.000001" value="-75.21" required></label>
+            <button type="submit">Registrar punto</button>
+          </form>
+          <div class="bloque">
+            <h3>Valle</h3>
+            <svg id="mapa-puntos" class="mapa" viewBox="0 0 1000 640"></svg>
+          </div>
+        </div>
+        <div class="bloque" style="margin-top:1rem"><table class="tabla" id="tabla-puntos"></table></div>
+      </section>
 
-    <section id="consulta" hidden>
-      <p id="sesion-consulta"></p>
-      <button id="salir-consulta" type="button">Cerrar sesión</button>
-      <h2>Pedidos</h2>
-      <p class="ayuda">El contratante ve el listado. El filtro por estado queda pendiente.</p>
-      <ul id="lista-consulta"></ul>
-    </section>
-  </main>
+      <section id="panel-pedidos" hidden>
+        <div class="acciones">
+          <label>Estado
+            <select id="filtro-estado">
+              <option value="">Todos</option>
+              <option>PENDIENTE</option>
+              <option>EN_RUTA</option>
+              <option>ENTREGADO</option>
+              <option>INCIDENCIA</option>
+            </select>
+          </label>
+          <button id="exportar" class="secundario" type="button">Exportar CSV</button>
+        </div>
+        <form class="bloque" id="form-pedido">
+          <h3>Registrar pedido</h3>
+          <div class="dos">
+            <label>Punto <select name="punto_id" id="select-punto" required></select></label>
+            <label>Peso (kg) <input name="peso_kg" type="number" min="0.1" step="0.1" required></label>
+            <label>Tipo de carga
+              <select name="tipo_carga">
+                <option value="GENERAL">General</option>
+                <option value="explosivo">Explosivo (prohibido)</option>
+                <option value="residuo peligroso">Residuo peligroso (prohibido)</option>
+              </select>
+            </label>
+            <label>Correo del contratante <input name="contratante_email" type="email" placeholder="cliente@ecologistica.test"></label>
+          </div>
+          <button type="submit">Registrar pedido</button>
+        </form>
+        <div class="bloque" style="margin-top:1rem"><table class="tabla" id="tabla-pedidos"></table></div>
+      </section>
+
+      <section id="panel-rutas" hidden>
+        <div class="acciones">
+          <button id="generar-ruta" type="button">Generar ruta</button>
+          <button id="reoptimizar" class="secundario" type="button">Reoptimizar</button>
+        </div>
+        <div class="dos">
+          <div class="bloque"><table class="tabla" id="tabla-rutas"></table></div>
+          <div class="bloque">
+            <h3 id="titulo-ruta">Recorrido</h3>
+            <p id="detalle-ruta" class="ayuda">Seleccione una ruta para ver sus paradas.</p>
+            <svg id="mapa-ruta" class="mapa" viewBox="0 0 1000 640"></svg>
+          </div>
+        </div>
+      </section>
+
+      <section id="panel-entregas" hidden>
+        <form class="bloque" id="form-entrega">
+          <h3>Resultado de la entrega</h3>
+          <p class="ayuda">Solo un pedido que ya está en ruta puede cerrarse. Si no se entrega, la incidencia es obligatoria.</p>
+          <label>Pedido <select name="pedido_id" id="select-entrega" required></select></label>
+          <label>Resultado
+            <select name="resultado"><option>ENTREGADO</option><option>INCIDENCIA</option></select>
+          </label>
+          <label>Motivo de la incidencia <input name="motivo" placeholder="Local cerrado"></label>
+          <button type="submit">Registrar entrega</button>
+        </form>
+      </section>
+
+      <section id="panel-indicadores" hidden>
+        <div class="acciones">
+          <label>Periodo
+            <select id="periodo">
+              <option value="todo">Todo el registro</option>
+              <option value="hoy">Hoy</option>
+              <option value="vacio">Periodo sin registros</option>
+            </select>
+          </label>
+          <button id="ver-indicadores" type="button">Calcular</button>
+        </div>
+        <div class="rejilla" id="indicadores"></div>
+      </section>
+
+      <section id="panel-parametros" hidden>
+        <form class="bloque" id="form-parametros">
+          <h3>Parámetros logísticos</h3>
+          <label>Factor de emisión (kg CO₂ por km) <input name="factor_emision_kg_por_km" type="number" min="0.01" step="0.01" value="0.21" required></label>
+          <label>Velocidad media (km/h) <input name="velocidad_kmh" type="number" min="1" step="1" value="28" required></label>
+          <button type="submit">Guardar parámetros</button>
+        </form>
+      </section>
+
+      <section id="panel-auditoria" hidden>
+        <div class="bloque"><table class="tabla" id="tabla-auditoria"></table></div>
+      </section>
+    </main>
+  </div>
   <script src="js/app.js"></script>
 </body>
 </html>

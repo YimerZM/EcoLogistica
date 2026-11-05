@@ -34,11 +34,11 @@ La lista ordena las paradas de norte a sur dentro de El Tambo, Huancayo y Chilca
 
 ## Pendientes
 
-1. **US-007:** dibujar la ruta en el mapa. Este sprint solo muestra la lista.
-2. **US-008:** reoptimizar una ruta ya generada.
-3. **US-009:** filtrar el listado de pedidos. El contratante ya puede ver el listado, sin filtro.
-4. Pasar la API a FastAPI y el almacén en memoria a PostgreSQL.
-5. Adjuntar las capturas recortadas de Jira.
+La página ya recorre los requisitos RF-001 a RF-015: perfiles, mapa esquemático WGS84, reoptimización, entregas, indicadores, exportación, auditoría y parámetros.
+
+1. Sustituir el mapa esquemático por cartografía externa cuando el curso lo pida.
+2. Pasar la API a FastAPI y el almacén en memoria a PostgreSQL.
+3. Adjuntar las capturas recortadas de Jira.
 
 ## Historial de versiones
 

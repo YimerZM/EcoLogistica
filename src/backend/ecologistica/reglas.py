@@ -5,7 +5,15 @@ from datetime import datetime, timedelta
 BLOQUEO_MINUTOS = 15
 MAX_INTENTOS = 3
 DISTRITOS = ("El Tambo", "Huancayo", "Chilca")
-ROLES = ("Administrador", "Operador", "Contratante")
+ROLES = (
+    "Administrador",
+    "Operador",
+    "Planificador",
+    "Conductor",
+    "Responsable",
+    "Auditor",
+    "Contratante",
+)
 # Caja aproximada de la provincia de Huancayo donde están los tres distritos.
 LAT_MIN, LAT_MAX = -12.20, -11.90
 LON_MIN, LON_MAX = -75.40, -75.00
@@ -41,7 +49,7 @@ def datos_usuario_validos(email: str, nombre: str, rol: str) -> str | None:
     if "@" not in email or not nombre.strip():
         return "Correo y nombre son obligatorios."
     if rol not in ROLES:
-        return "El rol debe ser Administrador, Operador o Contratante."
+        return "El rol no corresponde a un perfil del sistema."
     return None
 
 
@@ -113,7 +121,10 @@ def propuesta_de_ruta(pedidos: list, vehiculos: list, puntos: list) -> dict:
             "mensaje": "Ningún vehículo tiene capacidad para los pedidos pendientes.",
             "sin_cupo": sin_cupo,
         }
-    return {"ok": True, "rutas": rutas, "sin_cupo": sin_cupo, "mensaje": "Propuesta de ruta generada."}
+    mensaje = "Propuesta de ruta generada."
+    if sin_cupo:
+        mensaje = "Propuesta generada. No hubo capacidad para todos los pedidos."
+    return {"ok": True, "rutas": rutas, "sin_cupo": sin_cupo, "mensaje": mensaje}
 
 
 def coordenada_valida(latitud: float, longitud: float, distrito: str) -> str | None:

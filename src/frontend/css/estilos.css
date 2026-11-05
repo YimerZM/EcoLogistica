@@ -1,59 +1,259 @@
 :root {
-  color-scheme: light;
-  font-family: "Segoe UI", sans-serif;
-  background: #f4f7f4;
-  color: #1c2b22;
+  --bosque: #10281f;
+  --bosque-suave: #1a4334;
+  --hoja: #1f7a4d;
+  --hoja-suave: #e6f3ec;
+  --oro: #9a7433;
+  --crema: #f3efe4;
+  --papel: #fffdf8;
+  --tinta: #1b2420;
+  --muted: #5d6b63;
+  --linea: #e4dccb;
+  --aviso: #8d3b28;
+  --sombra: 0 18px 50px rgba(16, 40, 31, 0.08);
+  --radio: 16px;
 }
+
+* { box-sizing: border-box; }
 
 body {
-  margin: 0 auto;
-  max-width: 46rem;
-  padding: 1.5rem;
+  margin: 0;
+  color: var(--tinta);
+  background: var(--crema);
+  font-family: "Segoe UI", "Avenir Next", sans-serif;
+  line-height: 1.45;
 }
 
-header h1 {
-  margin-bottom: 0.2rem;
-}
-
-section {
-  background: #fff;
-  border: 1px solid #d5e0d6;
-  border-radius: 8px;
-  padding: 1rem 1.2rem;
-  margin-top: 1rem;
-}
-
-form {
-  display: grid;
-  gap: 0.6rem;
-}
-
-label {
-  display: grid;
-  gap: 0.2rem;
-  font-size: 0.95rem;
-}
-
-input, select, button {
+button, input, select {
   font: inherit;
-  padding: 0.45rem 0.55rem;
 }
 
 button {
-  width: fit-content;
-  background: #1f6b45;
-  color: #fff;
   border: 0;
-  border-radius: 4px;
+  border-radius: 999px;
+  padding: 0.65rem 1.1rem;
+  background: var(--hoja);
+  color: white;
   cursor: pointer;
 }
 
-.ayuda {
-  color: #3d5246;
-  font-size: 0.92rem;
+button.secundario {
+  background: transparent;
+  color: var(--bosque);
+  border: 1px solid var(--linea);
 }
 
-#mensaje-sesion, #mensaje-op {
+button.fantasma {
+  background: transparent;
+  color: #f4efe4;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+button:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.login {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+}
+
+.marca {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(154, 116, 51, 0.25), transparent 28%),
+    linear-gradient(165deg, var(--bosque) 0%, var(--bosque-suave) 70%);
+  color: #f7f3ea;
+  padding: 3.2rem 3.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.marca h1 {
+  font-family: Palatino, "Palatino Linotype", Georgia, serif;
+  font-weight: 500;
+  font-size: 3.4rem;
+  letter-spacing: -0.04em;
+  margin: 0.4rem 0 0.6rem;
+}
+
+.marca p { max-width: 34rem; color: #d9e4dc; }
+
+.sobrelinea {
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: #e6c98a;
+}
+
+.distritos {
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 2.4rem;
+}
+
+.distritos article {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.punto-marca {
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+  background: #e6c98a;
+  box-shadow: 0 0 0 6px rgba(230, 201, 138, 0.15);
+}
+
+.panel-acceso {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.tarjeta {
+  width: min(100%, 28rem);
+  background: var(--papel);
+  border: 1px solid var(--linea);
+  border-radius: 24px;
+  padding: 1.6rem;
+  box-shadow: var(--sombra);
+}
+
+.tarjeta h2 { margin-top: 0; font-family: Palatino, Georgia, serif; font-weight: 500; }
+
+form { display: grid; gap: 0.75rem; }
+
+label { display: grid; gap: 0.3rem; font-size: 0.92rem; }
+
+input, select {
+  border: 1px solid var(--linea);
+  background: white;
+  border-radius: 12px;
+  padding: 0.7rem 0.75rem;
+}
+
+.cuentas { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+
+.cuentas button {
+  background: var(--hoja-suave);
+  color: var(--bosque);
+  padding: 0.4rem 0.7rem;
+  font-size: 0.82rem;
+}
+
+.aviso {
   min-height: 1.2rem;
+  color: var(--aviso);
   font-weight: 600;
+}
+
+.aviso.ok { color: var(--hoja); }
+
+.app { min-height: 100vh; display: grid; grid-template-columns: 250px 1fr; }
+
+.menu {
+  background: var(--bosque);
+  color: #f4efe4;
+  padding: 1.3rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.menu strong {
+  font-family: Palatino, Georgia, serif;
+  font-size: 1.45rem;
+  font-weight: 500;
+  padding: 0.2rem 0.7rem 1rem;
+}
+
+.menu button {
+  text-align: left;
+  background: transparent;
+  border-radius: 12px;
+  color: #d7e3db;
+  white-space: nowrap;
+}
+
+.menu button.activo { background: rgba(255, 255, 255, 0.1); color: white; }
+
+.contenido { padding: 1.4rem 1.6rem 3rem; }
+
+.barra {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+
+.barra h2 { margin: 0; font-family: Palatino, Georgia, serif; font-weight: 500; font-size: 2rem; }
+
+.rol {
+  display: inline-block;
+  margin-left: 0.4rem;
+  background: var(--hoja-suave);
+  color: var(--bosque);
+  border-radius: 999px;
+  padding: 0.15rem 0.55rem;
+  font-size: 0.78rem;
+}
+
+.rejilla { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; }
+
+.metrica, .bloque {
+  background: var(--papel);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+}
+
+.metrica { padding: 1rem; }
+.metrica span { display: block; color: var(--muted); font-size: 0.82rem; }
+.metrica strong { font-size: 1.7rem; font-family: Palatino, Georgia, serif; }
+
+.dos { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 1rem; margin-top: 1rem; }
+.bloque { padding: 1rem 1.1rem; }
+.bloque h3 { margin: 0 0 0.8rem; font-size: 1.05rem; }
+
+.tabla { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+.tabla th { text-align: left; color: var(--muted); font-weight: 600; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; }
+.tabla th, .tabla td { padding: 0.55rem 0.35rem; border-bottom: 1px solid var(--linea); vertical-align: top; }
+.tabla tr { cursor: pointer; }
+.tabla tr.seleccionada { background: var(--hoja-suave); }
+
+.estado {
+  border-radius: 999px;
+  padding: 0.12rem 0.45rem;
+  font-size: 0.75rem;
+  background: #f3ead2;
+}
+.estado.EN_RUTA { background: #d9e8f8; }
+.estado.ENTREGADO, .estado.ACTIVA, .estado.DISPONIBLE, .estado.OK { background: var(--hoja-suave); }
+.estado.INCIDENCIA, .estado.RECHAZADO, .estado.NO_DISPONIBLE { background: #f8d9d2; }
+.estado.REEMPLAZADA { background: #ece7dc; }
+
+.mapa {
+  width: 100%;
+  height: 420px;
+  background: linear-gradient(#edf5ef, #f7f1df);
+  border-radius: 12px;
+  border: 1px solid var(--linea);
+}
+
+.vacio { color: var(--muted); padding: 0.6rem 0; }
+
+.acciones { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.6rem 0 1rem; }
+
+.ayuda { color: var(--muted); font-size: 0.92rem; }
+
+@media (max-width: 760px) {
+  .login, .app, .dos, .rejilla { grid-template-columns: 1fr; }
+  .marca { padding: 2rem 1.3rem; }
+  .marca h1 { font-size: 2.5rem; }
+  .menu { flex-direction: row; overflow: auto; }
+  .menu strong { display: none; }
 }

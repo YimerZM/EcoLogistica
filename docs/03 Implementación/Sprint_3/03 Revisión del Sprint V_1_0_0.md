@@ -33,10 +33,8 @@ Participaron ZEVALLOS MELENDRES YIMER EDYSON, POMACHAGUA YAPIAS BRYAN ANTONY y C
 
 ## Pendientes
 
-1. **US-007:** mapa del recorrido.
-2. **US-008:** reoptimizar la ruta cuando cambie un pedido.
-3. **US-009:** filtro del listado.
-4. FastAPI, PostgreSQL y las capturas recortadas de Jira.
+1. Cambiar el mapa esquemático por cartografía externa si la revisión lo pide.
+2. FastAPI, PostgreSQL y las capturas recortadas de Jira.
 
 ## Historial de versiones
 
