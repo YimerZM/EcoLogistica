@@ -67,6 +67,18 @@ Los archivos llevan la fecha `20261105`, el número y el nombre. Están en `docs
 11. [20261105 04.2 Retrospectiva del Sprint](docs/04%20Inspección%203/20261105%2004.2%20Retrospectiva%20del%20Sprint.md)
 12. [20261105 05 Manual técnico del sistema](docs/04%20Inspección%203/20261105%2005%20Manual%20técnico%20del%20sistema.md)
 
+## Inspección 4
+
+Los archivos llevan la fecha `20261112`, el número y el nombre. Están en `docs/05 Inspección 4`.
+
+1. [20261112 01 Plan de trabajo](docs/05%20Inspección%204/20261112%2001%20Plan%20de%20trabajo.md)
+2. [20261112 02 Elevator pitch](docs/05%20Inspección%204/20261112%2002%20Elevator%20pitch.md)
+3. [20261112 03 Demostración del product increment - Sprint 2](docs/05%20Inspección%204/20261112%2003%20Demostración%20del%20product%20increment%20-%20Sprint%202.md)
+4. [20261112 04.1 Flujo de trabajo Git Flow](docs/05%20Inspección%204/20261112%2004.1%20Flujo%20de%20trabajo%20Git%20Flow.md)
+5. [20261112 04.2 Pruebas de sistema](docs/05%20Inspección%204/20261112%2004.2%20Pruebas%20de%20sistema.md)
+6. [20261112 04.3 Pruebas de extremo a extremo](docs/05%20Inspección%204/20261112%2004.3%20Pruebas%20de%20extremo%20a%20extremo.md)
+7. [20261112 04.4 Sincronización repositorio remoto](docs/05%20Inspección%204/20261112%2004.4%20Sincronización%20repositorio%20remoto.md)
+
 ## Código
 
 - `src/frontend`: interfaz del incremento.
