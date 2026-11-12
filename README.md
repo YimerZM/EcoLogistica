@@ -50,6 +50,11 @@ Equipo: ZEVALLOS MELENDRES YIMER EDYSON (director), POMACHAGUA YAPIAS BRYAN ANTO
 3. [03 Revisión del Sprint V_1_0_0](docs/03%20Implementación/Sprint_3/03%20Revisión%20del%20Sprint%20V_1_0_0.md)
 4. [04 Retrospectiva del Sprint V_1_0_0](docs/03%20Implementación/Sprint_3/04%20Retrospectiva%20del%20Sprint%20V_1_0_0.md)
 
+### Reducción del impacto ambiental
+
+1. [01 Informe de reduccion del impacto ambiental V_1_0_0](docs/03%20Implementación/reduccion%20del%20impacto%20ambiental/01%20Informe%20de%20reduccion%20del%20impacto%20ambiental%20V_1_0_0.md)
+2. [02 Estandares Ingeniería de software V_1_0_0](docs/03%20Implementación/reduccion%20del%20impacto%20ambiental/02%20Estandares%20Ingeniería%20de%20software%20V_1_0_0.md)
+
 ## Inspección 3
 
 Los archivos llevan la fecha `20261105`, el número y el nombre. Están en `docs/04 Inspección 3`.
