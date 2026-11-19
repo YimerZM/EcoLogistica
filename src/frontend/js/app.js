@@ -12,13 +12,13 @@ const CUENTAS = [
 ];
 
 const MENU = {
-  Administrador: ["inicio", "usuarios", "vehiculos", "puntos", "pedidos", "rutas", "entregas", "indicadores", "parametros", "auditoria"],
-  Operador: ["inicio", "vehiculos", "puntos", "pedidos", "rutas", "entregas", "indicadores"],
-  Planificador: ["inicio", "pedidos", "rutas", "indicadores"],
-  Conductor: ["inicio", "rutas", "entregas"],
-  Responsable: ["inicio", "pedidos", "rutas", "indicadores"],
-  Auditor: ["inicio", "usuarios", "vehiculos", "puntos", "pedidos", "rutas", "indicadores", "auditoria"],
-  Contratante: ["inicio", "pedidos", "indicadores"],
+  Administrador: ["inicio", "usuarios", "vehiculos", "puntos", "pedidos", "rutas", "entregas", "indicadores", "parametros", "auditoria", "ayuda"],
+  Operador: ["inicio", "vehiculos", "puntos", "pedidos", "rutas", "entregas", "indicadores", "ayuda"],
+  Planificador: ["inicio", "pedidos", "rutas", "indicadores", "ayuda"],
+  Conductor: ["inicio", "rutas", "entregas", "ayuda"],
+  Responsable: ["inicio", "pedidos", "rutas", "indicadores", "ayuda"],
+  Auditor: ["inicio", "usuarios", "vehiculos", "puntos", "pedidos", "rutas", "indicadores", "auditoria", "ayuda"],
+  Contratante: ["inicio", "pedidos", "indicadores", "ayuda"],
 };
 
 const TITULOS = {
@@ -32,6 +32,7 @@ const TITULOS = {
   indicadores: "Indicadores",
   parametros: "Parámetros",
   auditoria: "Auditoría",
+  ayuda: "Ayuda",
 };
 
 const ESCRITURA = {
@@ -44,6 +45,9 @@ const ESCRITURA = {
   parametros: ["Administrador"],
   ejemplo: ["Administrador", "Operador"],
   exportar: ["Administrador", "Operador", "Planificador", "Responsable", "Auditor"],
+  vehiculosEditar: ["Administrador", "Operador"],
+  puntosEditar: ["Administrador", "Operador"],
+  pedidosEditar: ["Administrador", "Operador"],
 };
 
 function puede(clave) {
@@ -113,8 +117,12 @@ function dibujarPuntos(id, puntos, ruta) {
   }).join("");
   let linea = "";
   if (ruta) {
-    const coords = ruta.paradas.map((p) => xy(p.latitud, p.longitud).join(" ")).join(" ");
-    linea = `<polyline points="${coords}" fill="none" stroke="#10281f" stroke-width="4"></polyline>`;
+    const base = [[-12.068, -75.210]];
+    const coords = base.concat(ruta.paradas.map((p) => [p.latitud, p.longitud]))
+      .map(([lat, lon]) => xy(lat, lon).join(" "))
+      .join(" ");
+    const [bx, by] = xy(-12.068, -75.210);
+    linea = `<polyline points="${coords}" fill="none" stroke="#10281f" stroke-width="4"></polyline><circle cx="${bx}" cy="${by}" r="9" fill="#10281f"></circle><text x="${bx + 12}" y="${by + 4}" font-size="16" fill="#10281f">Base</text>`;
   }
   svg.innerHTML = mapaBase() + linea + marcas;
 }
@@ -172,7 +180,12 @@ async function pintarUsuarios() {
     ["Nombre", (u) => u.nombre],
     ["Rol", (u) => u.rol],
     ["Estado", (u) => estado(u.estado)],
-  ], usuarios.usuarios || []);
+  ], usuarios.usuarios || [], (usuario) => {
+    const formulario = document.getElementById("form-usuario-editar");
+    formulario.email.value = usuario.email;
+    formulario.nombre.value = usuario.nombre;
+    formulario.estado.value = usuario.estado;
+  });
 }
 
 function pintarVehiculos() {
@@ -181,7 +194,14 @@ function pintarVehiculos() {
     ["Capacidad", (v) => `${v.capacidad_kg} kg`],
     ["Estado", (v) => estado(v.estado)],
     ["Conductor", (v) => v.conductor_email || "Sin asignar"],
-  ], cache.vehiculos);
+  ], cache.vehiculos, (vehiculo) => {
+    const formulario = document.getElementById("form-vehiculo-editar");
+    formulario.vehiculo_id.value = vehiculo.vehiculo_id;
+    formulario.capacidad_kg.value = vehiculo.capacidad_kg;
+    formulario.estado.value = vehiculo.estado;
+    formulario.conductor_email.value = vehiculo.conductor_email || "";
+    formulario.estado.disabled = vehiculo.estado === "EN_RUTA";
+  });
 }
 
 function pintarPuntos() {
@@ -190,10 +210,20 @@ function pintarPuntos() {
     ["Distrito", (p) => p.distrito],
     ["Dirección", (p) => p.direccion],
     ["WGS84", (p) => `${p.latitud}, ${p.longitud}`],
-  ], cache.puntos);
+  ], cache.puntos, (punto) => {
+    const formulario = document.getElementById("form-punto-editar");
+    formulario.punto_id.value = punto.punto_id;
+    formulario.nombre.value = punto.nombre;
+    formulario.direccion.value = punto.direccion;
+    formulario.distrito.value = punto.distrito;
+    formulario.latitud.value = punto.latitud;
+    formulario.longitud.value = punto.longitud;
+  });
   dibujarPuntos("mapa-puntos", cache.puntos);
   const select = document.getElementById("select-punto");
-  select.innerHTML = cache.puntos.map((p) => `<option value="${p.punto_id}">${p.nombre} (${p.distrito})</option>`).join("");
+  const opciones = cache.puntos.map((p) => `<option value="${p.punto_id}">${p.nombre} (${p.distrito})</option>`).join("");
+  select.innerHTML = opciones;
+  document.getElementById("select-punto-editar").innerHTML = opciones;
 }
 
 function pintarPedidos() {
@@ -203,7 +233,16 @@ function pintarPedidos() {
     ["Peso", (p) => `${p.peso_kg} kg`],
     ["Estado", (p) => estado(p.estado)],
     ["Contratante", (p) => p.contratante_email || "—"],
-  ], cache.pedidos);
+  ], cache.pedidos, (pedido) => {
+    if (pedido.estado !== "PENDIENTE") {
+      aviso("Solo se modifica un pedido antes de planificarlo.");
+      return;
+    }
+    const formulario = document.getElementById("form-pedido-editar");
+    formulario.pedido_id.value = pedido.pedido_id;
+    formulario.punto_id.value = pedido.punto_id;
+    formulario.peso_kg.value = pedido.peso_kg;
+  });
 }
 
 function pintarRutas() {
@@ -230,7 +269,10 @@ function pintarRutas() {
 
 function pintarEntregas() {
   const asignados = cache.pedidos.filter((p) => p.estado === "EN_RUTA");
-  document.getElementById("select-entrega").innerHTML = asignados.map((p) => `<option value="${p.pedido_id}">Pedido ${p.pedido_id} · ${p.distrito} · ${p.peso_kg} kg</option>`).join("");
+  const select = document.getElementById("select-entrega");
+  select.innerHTML = asignados.length
+    ? asignados.map((p) => `<option value="${p.pedido_id}">Pedido ${p.pedido_id} · ${p.distrito} · ${p.peso_kg} kg</option>`).join("")
+    : `<option value="">No hay pedidos en ruta</option>`;
 }
 
 function mostrar(panel) {
@@ -249,8 +291,11 @@ function armarMenu() {
   menu.querySelectorAll("button").forEach((boton) => boton.addEventListener("click", () => mostrar(boton.dataset.panel)));
   ["form-usuario", "form-usuario-editar"].forEach((id) => { document.getElementById(id).hidden = !puede("usuarios"); });
   document.getElementById("form-vehiculo").hidden = !puede("vehiculos");
+  document.getElementById("form-vehiculo-editar").hidden = !puede("vehiculosEditar");
   document.getElementById("form-punto").hidden = !puede("puntos");
+  document.getElementById("form-punto-editar").hidden = !puede("puntosEditar");
   document.getElementById("form-pedido").hidden = !puede("pedidos");
+  document.getElementById("form-pedido-editar").hidden = !puede("pedidosEditar");
   document.getElementById("generar-ruta").hidden = !puede("rutas");
   document.getElementById("reoptimizar").hidden = !puede("rutas");
   document.getElementById("form-entrega").hidden = !puede("entregas");
@@ -325,6 +370,22 @@ document.getElementById("form-vehiculo").addEventListener("submit", async (event
   if (resultado.ok) { evento.target.reset(); await recargar(); }
 });
 
+document.getElementById("form-vehiculo-editar").addEventListener("submit", async (evento) => {
+  evento.preventDefault();
+  const datos = new FormData(evento.target);
+  const resultado = await api("/api/vehiculos", {
+    method: "PUT",
+    body: JSON.stringify({
+      vehiculo_id: Number(datos.get("vehiculo_id")),
+      capacidad_kg: Number(datos.get("capacidad_kg")),
+      estado: evento.target.estado.value,
+      conductor_email: datos.get("conductor_email"),
+    }),
+  });
+  aviso(resultado.mensaje || "Vehículo actualizado.", resultado.ok);
+  if (resultado.ok) await recargar();
+});
+
 document.getElementById("form-punto").addEventListener("submit", async (evento) => {
   evento.preventDefault();
   const datos = new FormData(evento.target);
@@ -342,6 +403,24 @@ document.getElementById("form-punto").addEventListener("submit", async (evento) 
   if (resultado.ok) await recargar();
 });
 
+document.getElementById("form-punto-editar").addEventListener("submit", async (evento) => {
+  evento.preventDefault();
+  const datos = new FormData(evento.target);
+  const resultado = await api("/api/puntos", {
+    method: "PUT",
+    body: JSON.stringify({
+      punto_id: Number(datos.get("punto_id")),
+      nombre: datos.get("nombre"),
+      direccion: datos.get("direccion"),
+      distrito: datos.get("distrito"),
+      latitud: Number(datos.get("latitud")),
+      longitud: Number(datos.get("longitud")),
+    }),
+  });
+  aviso(resultado.mensaje || "Punto actualizado.", resultado.ok);
+  if (resultado.ok) await recargar();
+});
+
 document.getElementById("form-pedido").addEventListener("submit", async (evento) => {
   evento.preventDefault();
   const datos = new FormData(evento.target);
@@ -355,6 +434,21 @@ document.getElementById("form-pedido").addEventListener("submit", async (evento)
     }),
   });
   aviso(resultado.mensaje || "Pedido registrado en estado PENDIENTE.", resultado.ok);
+  if (resultado.ok) await recargar();
+});
+
+document.getElementById("form-pedido-editar").addEventListener("submit", async (evento) => {
+  evento.preventDefault();
+  const datos = new FormData(evento.target);
+  const resultado = await api("/api/pedidos", {
+    method: "PUT",
+    body: JSON.stringify({
+      pedido_id: Number(datos.get("pedido_id")),
+      punto_id: Number(datos.get("punto_id")),
+      peso_kg: Number(datos.get("peso_kg")),
+    }),
+  });
+  aviso(resultado.mensaje || "Pedido actualizado.", resultado.ok);
   if (resultado.ok) await recargar();
 });
 
@@ -403,6 +497,7 @@ document.getElementById("ver-indicadores").addEventListener("click", async () =>
     ["Carga (kg)", datos.kg],
     ["Recorrido (km)", datos.km],
     ["CO₂ (kg)", datos.co2_kg],
+    ["Tiempo estimado (min)", datos.minutos ?? "—"],
   ].map(([nombre, valor]) => `<article class="metrica"><span>${nombre}</span><strong>${valor}</strong></article>`).join("");
 });
 

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ayuda — EcoLogística</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <main class="contenido" style="max-width: 880px; margin: 0 auto; padding: 1.5rem;">
+    <p class="sobrelinea">Archivo de ayuda</p>
+    <h1>EcoLogística</h1>
+    <p>Planificación de carga general en El Tambo, Huancayo y Chilca. La coordenada es WGS84. El mapa es un esquema del valle, no el GPS del vehículo.</p>
+    <p><a href="index.html">Volver al ingreso</a></p>
+
+    <section class="bloque">
+      <h2>Cómo entrar</h2>
+      <p>Desde la carpeta <code>src/backend</code> ejecute <code>python -m ecologistica</code> y abra http://127.0.0.1:8765. Deje esa terminal abierta.</p>
+      <table class="tabla">
+        <tr><th>Rol</th><th>Correo</th><th>Clave</th></tr>
+        <tr><td>Administrador</td><td>administrador@ecologistica.test</td><td>admin123</td></tr>
+        <tr><td>Operador</td><td>operador@ecologistica.test</td><td>operador123</td></tr>
+        <tr><td>Planificador</td><td>planificador@ecologistica.test</td><td>plan12345</td></tr>
+        <tr><td>Conductor</td><td>conductor@ecologistica.test</td><td>conductor1</td></tr>
+        <tr><td>Responsable</td><td>responsable@ecologistica.test</td><td>responsable1</td></tr>
+        <tr><td>Auditor</td><td>auditor@ecologistica.test</td><td>auditor123</td></tr>
+      </table>
+      <p class="ayuda">El contratante no viene creado. Lo registra el administrador. Tres claves incorrectas bloquean el acceso 15 minutos. Si ese plazo ya pasó, el contador vuelve a cero al empezar el siguiente ingreso.</p>
+    </section>
+
+    <section class="bloque">
+      <h2>Qué hace cada pantalla</h2>
+      <table class="tabla">
+        <tr><th>Pantalla</th><th>Para qué sirve</th><th>Requisito</th></tr>
+        <tr><td>Ingreso</td><td>Abre la sesión según el rol.</td><td>RF-001</td></tr>
+        <tr><td>Usuarios</td><td>El administrador registra, consulta y activa o desactiva cuentas. La lista no muestra la clave.</td><td>RF-002</td></tr>
+        <tr><td>Vehículos</td><td>Alta y modificación de placa, capacidad, estado y conductor.</td><td>RF-003</td></tr>
+        <tr><td>Puntos</td><td>Destinos en El Tambo, Huancayo o Chilca, con latitud y longitud. Lima se rechaza.</td><td>RF-004</td></tr>
+        <tr><td>Pedidos</td><td>Carga general queda pendiente. Explosivo y residuo peligroso no se guardan. Se puede filtrar por estado y exportar CSV.</td><td>RF-005, RF-009, RF-013</td></tr>
+        <tr><td>Rutas</td><td>Genera una propuesta de norte a sur respetando la capacidad, la dibuja en el valle y permite reoptimizar si hubo un cambio.</td><td>RF-006, RF-007, RF-008</td></tr>
+        <tr><td>Entregas</td><td>Cierra un pedido que ya está en ruta como entregado o con incidencia. La incidencia pide un motivo.</td><td>RF-010</td></tr>
+        <tr><td>Indicadores</td><td>Pedidos, kilogramos, kilómetros, CO₂ y minutos estimados. El contratante no ve el CO₂ de la flota.</td><td>RF-011, RF-012</td></tr>
+        <tr><td>Parámetros</td><td>El administrador cambia el factor de emisión y la velocidad. Los dos tienen que ser mayores que cero.</td><td>RF-015</td></tr>
+        <tr><td>Auditoría</td><td>El administrador y el auditor ven ingresos y operaciones.</td><td>RF-014</td></tr>
+      </table>
+    </section>
+
+    <section class="bloque">
+      <h2>Recorrido de demostración</h2>
+      <ol>
+        <li>Entre como operador.</li>
+        <li>En Panel, pulse <strong>Preparar datos de El Tambo, Huancayo y Chilca</strong>.</li>
+        <li>En Rutas, pulse <strong>Generar ruta</strong>. ECO-101 lleva 52 kg de 800. La pantalla muestra 11.73 km. Esa cifra no incluye el regreso a la base.</li>
+        <li>En Indicadores, periodo Todo el registro, pulse <strong>Calcular</strong>. El CO₂ usa 0.21 kg por kilómetro: 2.46 kg.</li>
+        <li>Para reoptimizar, primero cambie un pedido pendiente, un punto o registre otro pedido. Sin ese cambio, el sistema se niega.</li>
+      </ol>
+    </section>
+
+    <section class="bloque">
+      <h2>Si algo no responde</h2>
+      <ul>
+        <li>Si el navegador dice que 127.0.0.1 rechazó la conexión, el proceso no está encendido. Vuelva a ejecutar <code>python -m ecologistica</code>.</li>
+        <li>Al cerrar el servidor se pierden los datos de la sesión. Vuelva a cargar el ejemplo.</li>
+        <li>Un pedido explosivo que no aparece en la lista fue rechazado. Use carga general.</li>
+        <li>Las pruebas no necesitan la página: desde <code>src/backend</code>, <code>python -m unittest tests.test_reglas tests.test_e2e -v</code>.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

@@ -32,6 +32,7 @@
         <p id="mensaje-sesion" class="aviso" role="status"></p>
         <p class="ayuda">Cuentas de demostración. Elija un perfil y luego inicie sesión.</p>
         <div class="cuentas" id="cuentas"></div>
+        <p class="ayuda"><a href="ayuda.html">Archivo de ayuda</a></p>
       </div>
     </section>
   </div>
@@ -99,6 +100,19 @@
           </div>
           <button type="submit">Registrar vehículo</button>
         </form>
+        <form class="bloque" id="form-vehiculo-editar" style="margin-top:1rem">
+          <h3>Modificar vehículo</h3>
+          <p class="ayuda">Elija una fila de la tabla. Si el vehículo está en ruta, el estado se conserva.</p>
+          <input name="vehiculo_id" type="hidden">
+          <div class="dos">
+            <label>Capacidad (kg) <input name="capacidad_kg" type="number" min="1" step="0.1" required></label>
+            <label>Estado
+              <select name="estado"><option>DISPONIBLE</option><option>NO_DISPONIBLE</option><option>EN_RUTA</option></select>
+            </label>
+            <label>Correo del conductor <input name="conductor_email" type="email" placeholder="conductor@ecologistica.test"></label>
+          </div>
+          <button type="submit">Guardar vehículo</button>
+        </form>
         <div class="bloque" style="margin-top:1rem"><table class="tabla" id="tabla-vehiculos"></table></div>
       </section>
 
@@ -115,6 +129,19 @@
             <label>Latitud <input name="latitud" type="number" step="0.000001" value="-12.07" required></label>
             <label>Longitud <input name="longitud" type="number" step="0.000001" value="-75.21" required></label>
             <button type="submit">Registrar punto</button>
+          </form>
+          <form class="bloque" id="form-punto-editar">
+            <h3>Modificar punto</h3>
+            <p class="ayuda">Elija una fila. El cambio queda como cambio operativo para poder reoptimizar.</p>
+            <input name="punto_id" type="hidden">
+            <label>Nombre <input name="nombre" required></label>
+            <label>Dirección <input name="direccion" required></label>
+            <label>Distrito
+              <select name="distrito"><option>El Tambo</option><option>Huancayo</option><option>Chilca</option></select>
+            </label>
+            <label>Latitud <input name="latitud" type="number" step="0.000001" required></label>
+            <label>Longitud <input name="longitud" type="number" step="0.000001" required></label>
+            <button type="submit">Guardar punto</button>
           </form>
           <div class="bloque">
             <h3>Valle</h3>
@@ -152,6 +179,16 @@
             <label>Correo del contratante <input name="contratante_email" type="email" placeholder="cliente@ecologistica.test"></label>
           </div>
           <button type="submit">Registrar pedido</button>
+        </form>
+        <form class="bloque" id="form-pedido-editar" style="margin-top:1rem">
+          <h3>Modificar pedido pendiente</h3>
+          <p class="ayuda">Solo un pedido en estado PENDIENTE. Elija la fila en la tabla.</p>
+          <input name="pedido_id" type="hidden">
+          <div class="dos">
+            <label>Punto <select name="punto_id" id="select-punto-editar" required></select></label>
+            <label>Peso (kg) <input name="peso_kg" type="number" min="0.1" step="0.1" required></label>
+          </div>
+          <button type="submit">Guardar pedido</button>
         </form>
         <div class="bloque" style="margin-top:1rem"><table class="tabla" id="tabla-pedidos"></table></div>
       </section>
@@ -209,6 +246,10 @@
 
       <section id="panel-auditoria" hidden>
         <div class="bloque"><table class="tabla" id="tabla-auditoria"></table></div>
+      </section>
+
+      <section id="panel-ayuda" hidden>
+        <iframe class="ayuda-marco" src="ayuda.html" title="Archivo de ayuda de EcoLogística"></iframe>
       </section>
     </main>
   </div>

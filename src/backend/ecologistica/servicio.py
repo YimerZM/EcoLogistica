@@ -382,6 +382,7 @@ class Servicio:
         if not pedidos and not rutas:
             return {"ok": False, "mensaje": "No existen datos para realizar el cálculo.", "periodo": periodo}
         km = round(sum(float(r.get("km", 0)) for r in rutas), 2)
+        velocidad = float(self.parametros["velocidad_kmh"])
         return {
             "ok": True,
             "periodo": "Hoy" if periodo == "hoy" else "Todo el registro",
@@ -393,6 +394,7 @@ class Servicio:
             "km": km,
             "co2_kg": round(km * float(self.parametros["factor_emision_kg_por_km"]), 2),
             "factor": self.parametros["factor_emision_kg_por_km"],
+            "minutos": round(km / velocidad * 60, 1) if velocidad else 0,
         }
 
     def actualizar_parametros(self, factor: float, velocidad: float) -> dict:
