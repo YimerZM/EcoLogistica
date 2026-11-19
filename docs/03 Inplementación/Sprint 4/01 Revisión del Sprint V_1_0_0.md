@@ -14,7 +14,7 @@
 
 ## Historias de Usuario completadas en este Sprint
 
-El comportamiento de estas historias está en la página desde el commit `8f23fbf` (`feat: presenta la operacion completa en una pagina con mapa, roles e indicadores`). La ayuda y la edición de vehículos, puntos y pedidos pendientes quedaron en el commit `82d5c25`. Este Sprint 4 las deja cubiertas por la suite de Playwright en `frontend/e2e` y por las pruebas de Python en `src/backend/tests`. No hay pull request: el trabajo se integró por commit en `develop` y `main`.
+El comportamiento de estas historias está en la página desde el commit `8f23fbf` (`feat: presenta la operacion completa en una pagina con mapa, roles e indicadores`). La ayuda y la edición de vehículos, puntos y pedidos pendientes quedaron en el commit `82d5c25`. La suite de Playwright, los tres flujos de GitHub Actions y estos informes cierran en el commit `b5d956c`. No hay pull request: el trabajo se integró por commit en `develop` y `main`.
 
 | Historia | Criterio verificado | Evidencia |
 |---|---|---|
@@ -58,4 +58,4 @@ La retroalimentación de esta revisión es la del propio cierre: la pantalla de 
 
 | Versión | Fecha | Cambio |
 |---|---|---|
-| 1.0.0 | 2026-11-19 | Revisión del Sprint 4 con las historias cerradas en `8f23fbf` y `82d5c25` y la suite E2E de este cierre. |
+| 1.0.0 | 2026-11-19 | Revisión del Sprint 4. Historias en `8f23fbf` y `82d5c25`. Suite, flujos e informes en `b5d956c`. |
