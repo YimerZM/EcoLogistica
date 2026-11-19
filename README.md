@@ -50,6 +50,19 @@ Equipo: ZEVALLOS MELENDRES YIMER EDYSON (director), POMACHAGUA YAPIAS BRYAN ANTO
 3. [03 Revisión del Sprint V_1_0_0](docs/03%20Implementación/Sprint_3/03%20Revisión%20del%20Sprint%20V_1_0_0.md)
 4. [04 Retrospectiva del Sprint V_1_0_0](docs/03%20Implementación/Sprint_3/04%20Retrospectiva%20del%20Sprint%20V_1_0_0.md)
 
+### Sprint 4 — Cierre, pruebas E2E y usabilidad
+
+La consigna pide esta carpeta con la grafía `docs/03 Inplementación/Sprint 4`.
+
+[![CI](https://github.com/YimerZM/EcoLogistica/actions/workflows/ci.yml/badge.svg)](https://github.com/YimerZM/EcoLogistica/actions/workflows/ci.yml)
+[![Tests](https://github.com/YimerZM/EcoLogistica/actions/workflows/tests.yml/badge.svg)](https://github.com/YimerZM/EcoLogistica/actions/workflows/tests.yml)
+[![Deploy](https://github.com/YimerZM/EcoLogistica/actions/workflows/deploy-production.yml/badge.svg)](https://github.com/YimerZM/EcoLogistica/actions/workflows/deploy-production.yml)
+
+1. [01 Revisión del Sprint V_1_0_0](docs/03%20Inplementación/Sprint%204/01%20Revisión%20del%20Sprint%20V_1_0_0.md)
+2. [02 Retrospectiva del Sprint V_1_0_0](docs/03%20Inplementación/Sprint%204/02%20Retrospectiva%20del%20Sprint%20V_1_0_0.md)
+3. [03 Analisis PlayWrigth V_1_0_0](docs/03%20Inplementación/Sprint%204/03%20Analisis%20PlayWrigth%20V_1_0_0.md)
+4. [04 Usabilidad V_1_0_0](docs/03%20Inplementación/Sprint%204/04%20Usabilidad%20V_1_0_0.md)
+
 ### Reducción del impacto ambiental
 
 1. [01 Informe de reduccion del impacto ambiental V_1_0_0](docs/03%20Implementación/reduccion%20del%20impacto%20ambiental/01%20Informe%20de%20reduccion%20del%20impacto%20ambiental%20V_1_0_0.md)

@@ -18,6 +18,9 @@ __pycache__/
 # Construcción y temporales
 dist/
 build/
+playwright-report/
+test-results/
+blob-report/
 *.log
 *.tmp
 .DS_Store

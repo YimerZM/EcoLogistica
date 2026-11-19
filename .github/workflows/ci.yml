@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Compilar el backend
+        run: python -m compileall -q src/backend
+      - name: Revisar la sintaxis del cliente
+        run: node --check src/frontend/js/app.js
+      - name: Comprobar la página y el archivo de ayuda
+        run: |
+          test -f src/frontend/index.html
+          test -f src/frontend/css/estilos.css
+          test -f src/frontend/js/app.js
+          test -f src/frontend/ayuda.html
+          test -f frontend/playwright.config.js
+          test -f frontend/package.json
